@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Page</title>
+<link rel="stylesheet" type="text/css" href="easter-form.css">
+<link rel="stylesheet" type="text/css" href="spinner.css"> <!-- Include the spinner CSS -->
+</head>
+<body>
+
+<div class="container">
+    <h2>Registration Form</h2>
+    <form id="registrationForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required> <!-- Add email input field -->
+
+
+        <label for="churchBranch">Church Branch:</label>
+        <select id="churchBranch" name="churchBranch" required>
+            <option value="">Select Church Branch</option>
+            <!-- Replace the options below with your church branches -->
+            <option value="Live Word Terbenacle">Live Word Terbenacle</option>
+            <option value="Arena Of Reconciliation">Arena Of Reconciliation</option>
+            <option value="Restoration Arena">Restoration Arena</option>
+            <option value="Okehi Church 1, Etche">Okehi Church 1, Etche</option>
+            <option value="Amuzu Church">Amuzu Church</option>
+            <option value="Terbenacle Of Testimony">Terbenacle Of Testimony</option>
+            <option value="First Timer">First Timer</option>
+            <!-- Add more options as needed -->
+        </select>
+
+        <!-- Add the loading spinner -->
+        <button type="submit" id="submitButton">
+            <span>Submit and Register,</span>
+            <span class="spinner"> Registering...</span> <!-- Loading spinner -->
+        </button>
+    <p>Happy Retreat Experience!</a><p/>
+    </form>
+</div>
+
+<script>
+document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+    
+    // Display the loading spinner when the form is being submitted
+    document.getElementById('submitButton').disabled = true; // Disable the button to prevent multiple submissions
+    document.querySelector('.spinner').style.display = 'inline-block';
+    
+    // Collect form data
+    const formData = new FormData(this);
+
+    // Send form data asynchronously
+    fetch('https://formsubmit.co/ajax/info@throneofgracebc.org', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            // Redirect after form submission is successful
+            window.location.href = 'complete-page.html'; // Replace with your desired URL
+        } else {
+            // Handle error if form submission fails
+            console.error('Form submission failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+</script>
+
+</body>
+</html>
